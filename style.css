@@ -1,0 +1,63 @@
+
+@font-face {
+    font-family: Flexo;
+    src: url("Flexo-Medium.ttf");
+  }
+
+:root {
+    font-size: 14pt;
+    font-family: Flexo;
+}
+
+body {
+    background: #424242 url("body_bg.png") fixed;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    background: #ffffff url("container_bg.png") fixed;
+
+    margin: 0 auto;
+    padding: 4rem;
+    width: 920px;
+    height: 100%;
+    box-sizing: border-box;
+    max-width: calc(100% - 2rem);
+    display: grid;
+    align-content: center;
+    grid-auto-flow: row;
+    grid-gap: 1rem;
+    box-shadow: 1rem 0rem 2rem rgba(0, 0, 0, 0.4);
+}
+
+footer {
+    font-size: 0.8rem;
+}
+
+label {
+    font-size: 1.2rem;
+    margin-bottom: -0.5rem;
+}
+
+input {
+    font-size: 1.2rem;
+    font-family: Flexo;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+}
+
+details summary::marker {
+    display: none;
+}
+
+#sprites_ctrl {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 128px);
+}
