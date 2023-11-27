@@ -1066,6 +1066,28 @@ function update_numbers() {
     draw_pokemon();
 }
 
+
+function set_sprite(img, name, iteration=0) {
+    // define some URLs to try (all the games in inverse order)
+    let urls = [
+        `https://img.pokemondb.net/sprites/bank/normal/${name}.png`,  // bank has pretty much everything up to gen 6
+        `https://img.pokemondb.net/sprites/scarlet-violet/normal/1x/${name}.png`, // scarlet/violet has best coverage of gens 7+
+        `https://img.pokemondb.net/sprites/home/normal/1x/${name}.png`, // home has some gen 8s which scar/vi missed
+        `https://img.pokemondb.net/sprites/sun-moon/normal/${name}.png`,
+    ]
+    // if we've tried them all, quit
+    if (iteration >= urls.length) {
+        img.src = "null.png"
+        return
+    }
+    // setup error behaviour to call this function
+    img.onerror = function() {
+        set_sprite(img, name, iteration+1)
+    }
+    img.src = urls[iteration];
+}
+
+
 function draw_pokemon() {
     var pokemon_ctrl = document.getElementById("pokemon_ctrl")
     var sprites_ctrl = document.getElementById("sprites_ctrl")
@@ -1074,12 +1096,18 @@ function draw_pokemon() {
     sprites_ctrl.innerHTML = "";
 
     for (let name of pokemon_ctrl.value.split(",")) {
+        // sanitize name
         name = name.trim();
         name = name.toLowerCase();
         name = name.replace(" ", "-");
+        // make an image for each name
         if (name in pokemap_byname) {
             let img = document.createElement("img");
-            img.src = `sprites/${name}.png`;
+            // setup img
+            img.style = "width: 128px; height: 128px; object-fit: contain;"
+            // set sprite
+            set_sprite(img, name)
+            // append
             sprites_ctrl.appendChild(img);
         }
     }
