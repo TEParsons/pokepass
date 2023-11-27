@@ -95,8 +95,9 @@ function draw_pokemon() {
     // clear ctrl
     sprites_ctrl.innerHTML = "";
 
-    for (let name of pokemon_ctrl.value.split(",")) {
+    for (let rawName of pokemon_ctrl.value.split(",")) {
         // sanitize name
+        let name = rawName;
         name = name.trim();
         name = name.toLowerCase();
         name = name.replace(" ", "-");
@@ -110,6 +111,13 @@ function draw_pokemon() {
             set_sprite(img, name)
             // append
             sprites_ctrl.appendChild(img);
+        } else {
+            // add a text element
+            let lbl = document.createElement("div");
+            // set content
+            lbl.innerText = rawName;
+            // append
+            sprites_ctrl.appendChild(lbl);
         }
     }
 }
