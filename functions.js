@@ -24,9 +24,16 @@ function update_pokemon() {
     let pokes = [];
     for (let num of numbers_ctrl.value.match(/\d{1,3}|\D*/g)) {
         num = num.trim()
+        // if first char is a 0, use missingno
+        while (num.length && num[0] === "0") {
+            pokes.push("Missingno");
+            num = num.slice(1);
+        }
+        // if 0 was the only character, we're done
         if (num.length === 0) {
             continue;
         }
+        // parse to an integer
         let asInt = parseInt(num)
         // if given a string, use it as is
         if (isNaN(asInt)) {
@@ -72,6 +79,11 @@ pokemon_ctrl.oninput = update_numbers;
 
 
 function set_sprite(img, name, iteration=0) {
+    // handle missingno (special case)
+    if (name === "missingno") {
+        img.src = "https://static.wikia.nocookie.net/slenderfortressnonofficial/images/d/d8/MissingNo..png";
+        return
+    }
     // define some URLs to try (all the games in inverse order)
     let urls = [
         `https://img.pokemondb.net/sprites/bank/normal/${name}.png`,  // bank has pretty much everything up to gen 6
