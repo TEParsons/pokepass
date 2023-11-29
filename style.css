@@ -38,10 +38,6 @@ main {
     overflow-y: auto;
 }
 
-footer {
-    font-size: 0.8rem;
-}
-
 label {
     font-size: 1.2rem;
     margin-bottom: -0.5rem;
