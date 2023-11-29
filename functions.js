@@ -9,6 +9,7 @@ const pokemap_byname = Object.fromEntries(
 );
 const pokemon_ctrl = document.getElementById("pokemon_ctrl")
 const numbers_ctrl = document.getElementById("numbers_ctrl")
+const random_btn = document.getElementById("random_btn")
 
 function toTitleCase(string) {
     try {
@@ -128,9 +129,47 @@ function draw_pokemon() {
             // add a text element
             let lbl = document.createElement("div");
             // set content
-            lbl.innerText = rawName;
+            lbl.innerText = rawName.replaceAll('"', "");
             // append
             sprites_ctrl.appendChild(lbl);
         }
     }
 }
+
+
+function randomise_numbers() {
+    // pick 3 pokemon
+    let ndigits = 0;
+    let vals = [];
+    while (ndigits < 9) {
+        let this_num = String(Math.round(Math.random()*1000));
+        vals.push(this_num);
+        ndigits += this_num.length;
+    }
+    // add one of each char type
+    let lowers = "abcdefghijklmnopqrstuvwxyz";
+    let uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    let specials = "~`!@#$%^&*()_-+={[}]|:;'<,>.?/"
+    let i
+    i = Math.floor(Math.random() * lowers.length);
+    vals.push(lowers[i]);
+    i = Math.floor(Math.random() * uppers.length);
+    vals.push(uppers[i]);
+    i = Math.floor(Math.random() * specials.length);
+    vals.push(specials[i]);
+    ndigits += 3;
+    // add more random chars until we're at 12 chars
+    let chars = lowers + uppers + specials
+    while (ndigits < 14) {
+        i = Math.floor(Math.random() * chars.length);
+        vals.push(chars[i]);
+        ndigits += 1;
+    }
+    // shuffle
+    vals = vals.sort( () => .5 - Math.random() );
+    // join and set
+    numbers_ctrl.value = vals.join("");
+    // update pokemon
+    update_pokemon();
+}
+random_btn.onclick = randomise_numbers;

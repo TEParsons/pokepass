@@ -35,7 +35,7 @@ main {
     grid-auto-flow: row;
     grid-gap: 1rem;
     box-shadow: 1rem 0rem 2rem rgba(0, 0, 0, 0.4);
-    overflow: scroll;
+    overflow-y: auto;
 }
 
 footer {
@@ -67,4 +67,13 @@ details summary::marker {
 #sprites_ctrl {
     display: grid;
     grid-template-columns: repeat(auto-fill, 128px);
+    justify-items: center;
+    align-items: center;
+    font-size: 64px;
+}
+
+#numbers_ctrl_sizer {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: auto min-content;
 }

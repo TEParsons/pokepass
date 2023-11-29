@@ -1,4 +1,5 @@
 <head>
+    <meta charset="utf-8">
     <script type="module" src="functions.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -28,11 +29,19 @@
         ></input>
         <div id="sprites_ctrl"></div>
         <label for="numbers_ctrl">Password</label>
-        <input 
-            type="text" 
-            id="numbers_ctrl" 
-            placeholder="Ash251217167"
-        ></input>
+        <div id="numbers_ctrl_sizer">
+            <input 
+                type="text" 
+                id="numbers_ctrl" 
+                placeholder="Ash251217167"
+            ></input>
+            <input 
+                type="button" 
+                value="⟲ Randomise" 
+                id="random_btn"
+            ></input>
+            
+        </div>
         <footer>
             <p></p>This site is not connected to <b>any</b> database, nothing you type here will leave your own browser and computer. You can even check the code yourself <a href="http://github.com/TEParsons/pokepass">here</a>.</p>
         </footer>
