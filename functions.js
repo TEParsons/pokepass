@@ -23,14 +23,9 @@ function toTitleCase(string) {
 
 function update_pokemon() {
     let pokes = [];
-    for (let num of numbers_ctrl.value.match(/\d{1,3}|\D*/g)) {
+    for (let num of numbers_ctrl.value.match(/0|[123456789]\d{0,2}(?!0)|\D*/g)) {
         num = num.trim()
-        // if first char is a 0, use missingno
-        while (num.length && num[0] === "0") {
-            pokes.push("Missingno");
-            num = num.slice(1);
-        }
-        // if 0 was the only character, we're done
+        // skip blank entries
         if (num.length === 0) {
             continue;
         }
